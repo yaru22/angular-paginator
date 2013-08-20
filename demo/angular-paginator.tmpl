@@ -1,0 +1,28 @@
+<ul class="pure-paginator l-centered l-box">
+  <li>
+    <a href=""
+        class="pure-button prev"
+        ng-click="goToPage(paginator.currentPage - 1)">
+      &#171;
+    </a>
+  </li>
+
+  <li ng-repeat="index in getPaginatorRange()">
+    <a href=""
+        class="pure-button"
+        ng-class="{
+          'pure-button-active': index == paginator.currentPage
+        }"
+        ng-click="goToPage(index)">
+      {{ index }}
+    </a>
+  </li>
+
+  <li>
+    <a href=""
+        class="pure-button next"
+        ng-click="goToPage(paginator.currentPage + 1)">
+      &#187;
+    </a>
+  </li>
+</ul>

@@ -6,18 +6,56 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Directive Demo Page</title>
+  <title>Paginator Demo Page</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
-  <link href="component.css" rel="stylesheet" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.2.1/pure-min.css">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="app.css" rel="stylesheet" />
 </head>
-<body ng-controller="demoController">
-  <blink>{{ text1 }}</blink>
-  <blink>{{ text2 }}</blink>
 
+<body>
+  <div class="wrapper">
+    <div class="pure-g-r"
+        ng-init="numItems = 100"
+        ng-controller="demoController">
+      <div class="pure-u-1-3 pure-form">
+        <input type="number"
+            class="pure-input-1"
+            placeholder="Total number of items."
+            ng-model="numItems" />
+
+        <a href=""
+            class="pure-button pure-button-primary"
+            ng-click="changeItems()">Replace Items</a>
+
+        <a href=""
+            class="pure-button pure-button-primary"
+            ng-click="pg.items.push(9)">Add Item</a>
+
+        <input type="text"
+            class="pure-input-1"
+            placeholder="Number of items per page."
+            ng-model="pg.itemsPerPage" />
+
+        <input type="text"
+            class="pure-input-1"
+            placeholder="Maximum number of paginator buttons."
+            ng-model="pg.maxNumButtons" />
+      </div>
+
+      <div class="pure-u-1" ng-repeat="item in (pg.items | skip:pg.getNumSkips() | limitTo:pg.itemsPerPage) track by $index">
+        {{ item }}
+      </div>
+      <div paginator="pg"></div>
+    </div>
+  </div>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.3.1/lodash.min.js"></script>
   <script src="angular.js"></script>
-  <script src="component.js"></script>
-  <script src="main.js"></script>
+  <script src="angular-paginator.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>
